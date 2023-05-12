@@ -1,12 +1,12 @@
+require("dotenv").config()
 const express = require('express')
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express()
 const cors = require('cors')
 const port = process.env.PORT || 5000;
-const dotenv = require("dotenv")
+
 
 app.use(cors())
-dotenv.config()
 app.use(express.json())
 
 const uri = `mongodb+srv://${process.env.DB_CHOCOLATE}:${process.env.DB_PASS}@cluster0.nlw4swl.mongodb.net/?retryWrites=true&w=majority`;
@@ -46,10 +46,10 @@ app.put('/addChocolate/:id',async(req,res) =>{
       name:updateChocolate.name,
       country:updateChocolate.country,
       category:updateChocolate.category,
-      photo:updateChocolate.photo,
-    },
-  };
-  const result = await movies.updateOne(filter, chocolate, options);
+      photo:updateChocolate.photo
+    }
+  }
+  const result = await ChocolateCollection.updateOne(filter, chocolate, options);
   res.send(result)
 })
 
